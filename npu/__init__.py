@@ -25,12 +25,13 @@ utils
 
 """
 
-from .utils.test_device import get_driver_version, version_to_tuple
 import platform
 
 __supported_driver__ = "10.1109.8.100"
 
+# Only perform Windows driver/version checks on Windows.
 if platform.system() == 'Windows':
+    from .utils.test_device import get_driver_version, version_to_tuple
     __installed_driver__ = get_driver_version()
     
     if version_to_tuple(__installed_driver__) < version_to_tuple(__supported_driver__):
